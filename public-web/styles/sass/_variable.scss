@@ -1,0 +1,90 @@
+/*
+   公用变量
+*/
+
+/* color
+-------------------------- */
+$max-width:7.5rem;
+//主色调
+$color-primary: #da004b !default;
+//文本主颜色
+$color-text-primary: #333333 !default;
+//文本第二使用颜色
+$color-text-secondary: #666 !default;
+//placeholder颜色
+$color-text-placeholder:#ccc !default;
+
+
+/* Border
+-------------------------- */
+//主边框色
+$border-color-base: #ddd !default;
+//浅边框色
+$border-color-light: #ccc !default;
+
+//主圆角
+$border-radius-base: 5px !default;
+//小圆角
+$border-radius-small: 3px !default;
+//圆
+$border-radius-circle: 100% !default;
+
+/* Box-shadow
+-------------------------- */
+//主阴影
+$box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !default;
+//深阴影
+$box-shadow-dark: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !default;
+//浅阴影
+$box-shadow-light:0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+
+/* Fill
+-------------------------- */
+//填充主颜色
+$--fill-base: #fff;
+
+/* Font
+-------------------------- */
+//默认字体
+$font-style-base:-apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue","Microsoft Yahei",STHeiti,Tahoma,Simsun,sans-serif;
+$font-size-small: 0.24rem !default;
+$font-size-center: 0.28rem !default;
+$font-size-large: 0.32rem !default;
+
+$font-color-disabled-base: #bbb !default;
+//默认行高
+$font-line-height-primary: 150% !default;
+
+/* Disable base
+-------------------------- */
+//disable 默认填充颜色
+$disabled-fill-base: #eee !default;
+//disable 默认字体颜色
+$disabled-color-base: $color-text-placeholder !default;
+//disable 默认边框颜色
+$disabled-border-base: $border-color-light !default;
+
+
+/* Transition
+-------------------------- */
+//动画默认设置
+$time-base:0.5s;
+$all-transition: all $time-base cubic-bezier(.645,.045,.355,1) !default;
+$fade-transition: opacity $time-base cubic-bezier(0.23, 1, 0.32, 1) !default;
+$fade-linear-transition: opacity $time-base linear !default;
+$md-fade-transition: transform $time-base cubic-bezier(0.23, 1, 0.32, 1), opacity $time-base cubic-bezier(0.23, 1, 0.32, 1) !default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

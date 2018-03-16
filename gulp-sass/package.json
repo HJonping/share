@@ -1,0 +1,23 @@
+{
+  "name": "sass",
+  "version": "1.0.1",
+  "description": "build sass file and autoprefixer",
+  "main": "gulpfile.js",
+  "scripts": {
+    "sasso": "gulp sass-one:watch",
+    "sassm": "gulp sass-multi:watch",
+    "sassmm": "gulp sass-multi-multi:watch"
+  },
+  "keywords": [
+    "sass"
+  ],
+  "author": "hjp",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-sass": "^3.1.0",
+    "merge-stream": "^1.0.1",
+    "path": "^0.12.7"
+  }
+}
