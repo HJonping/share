@@ -1,7 +1,7 @@
 {
-  "name": "sass",
+  "name": "gulp",
   "version": "1.0.1",
-  "description": "build sass file and autoprefixer",
+  "description": "gulp",
   "main": "gulpfile.js",
   "scripts": {
     "sasso": "gulp sass-one:watch",

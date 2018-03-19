@@ -6,7 +6,7 @@ const gulp = require('gulp'),
     merge = require('merge-stream');
 
 
-
+/**************************编译sass start*********************/
 /*一个项目  start*/
 gulp.task('sass-one', function() {
     return gulp.src('./styles/sass/*.scss').pipe(sass({
@@ -87,3 +87,5 @@ gulp.task('sass-multi-multi:watch', function() {
     });
 });
 /*多个项目styles下多个样式文件夹 end*/
+
+/**************************编译sass end*********************/
