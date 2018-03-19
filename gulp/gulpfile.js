@@ -5,16 +5,16 @@ const gulp = require('gulp'),
     path = require('path'),
     merge = require('merge-stream');
 
+//输出方式 nested, expanded, compact, compressed
+var outputStyle='expanded';   
+
 
 /**************************编译sass start*********************/
 /*一个项目  start*/
 gulp.task('sass-one', function() {
     return gulp.src('./styles/sass/*.scss').pipe(sass({
-        //输出方式 nested, expanded, compact, compressed
-        outputStyle: 'expanded'
+        outputStyle: outputStyle
     }).on('error', sass.logError)).pipe(autoprefixer({
-        //浏览器设置
-        browsers: ['>1%', 'last 3 versions', 'Android >= 4.4', 'iOS 8'],
         //是否美化属性值 默认：true 像这样：
         //-webkit-transform: rotate(45deg);
         //        transform: rotate(45deg);       
@@ -35,11 +35,8 @@ gulp.task('sass-multi', function() {
         return gulp.src(element + '/src/main/webapp/styles/sass/*.scss', {
             base: element + '/src/main/webapp/styles/sass'
         }).pipe(sass({
-            //输出方式 nested, expanded, compact, compressed
-            outputStyle: 'expanded'
+            outputStyle:outputStyle
         }).on('error', sass.logError)).pipe(autoprefixer({
-            //浏览器设置
-            browsers: ['>1%', 'last 3 versions', 'Android >= 4.4', 'iOS 8'],
             //是否美化属性值 默认：true 像这样：
             //-webkit-transform: rotate(45deg);
             //        transform: rotate(45deg);       
@@ -68,11 +65,8 @@ gulp.task('sass-multi-multi', function() {
         return gulp.src(element + '/sass/*.scss', {
             base: element + '/sass'
         }).pipe(sass({
-            //输出方式 nested, expanded, compact, compressed
-            outputStyle: 'expanded'
+            outputStyle: outputStyle
         }).on('error', sass.logError)).pipe(autoprefixer({
-            //浏览器设置
-            browsers: ['>1%', 'last 3 versions', 'Android >= 4.4', 'iOS 8'],
             //是否美化属性值 默认：true 像这样：
             //-webkit-transform: rotate(45deg);
             //        transform: rotate(45deg);       
