@@ -19,19 +19,19 @@
     position: $position;
     top: 50%;
     left: 50%;
-    @include transform(translateX(-50%) translateY(-50%));
+    transform:translateX(-50%) translateY(-50%);
 }
 
 @mixin center-horizontal($position: absolute) {
     position: $position;
     left: 50%;
-    @include transform(translateX(-50%));
+    transform:translateX(-50%);
 }
 
 @mixin center-vertical($position: absolute) {
     position: $position;
     top: 50%;
-    @include transform(translateY(-50%));
+    transform:translateY(-50%);
 }
 
 //gradient
