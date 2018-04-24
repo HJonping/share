@@ -1,0 +1,89 @@
+@import 'base';
+@import 'mixins';
+
+/*****上传图片upload样式 start*****/
+.upload-img{
+  position: relative;
+  margin: 0 20px;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ddd;
+  font-size: 0;
+  em {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    margin: -1px 0 0 -10px;
+    background-color: #999;
+
+    display: block;
+    &:nth-child(2) {
+      transform: rotate(90deg)
+    }
+  }
+  >input[type="file"] {
+    position:relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+  .img-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .img-container-multi{
+    img{
+      margin-top:10px;
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+  }
+}
+.upload-img-big{
+  @extend .upload-img;
+  width: 100%;
+}
+/*****上传图片upload样式 end *****/
+
+/****** tab-slide样式  start *****/
+  .tab-title{
+    position: relative;
+    @include clearfix();
+    @include flex-center();
+    li{
+      color: $color-text-primary;
+      font-size: $font-size-small;
+      padding: 0 .2rem .15rem;
+      &.on{
+        color: #999;
+      }
+    }
+    .line{
+      position: absolute;
+      bottom: 0;
+      width: .5rem;
+      height: 2px;
+      background-color: $color-text-primary;
+      transition:$all-transition;
+    }
+  }
+  .slide-tab-content{
+    height: 3rem;
+    text-align: center;
+  }
+/****** tab-slide样式  end *****/

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="index,follow">
+    <title>上传图片</title>
+    <link  rel="stylesheet" href="../styles/css/example.css">
+</head>
+<body>
+    <h2>单选</h2>
+    <div class="upload-img">
+        <em></em>
+        <em></em>
+        <input type="file" onchange="previewFiles(this)" accept="image/gif, image/jpeg">
+        <div class="img-container"></div>
+    </div>
+    <br>
+    <h2>多选</h2>
+    <div class="upload-img">
+        <em></em>
+        <em></em>
+        <input type="file" onchange="previewFiles(this)" accept="image/gif, image/jpeg" multiple>
+        <div class="img-container-multi"></div>
+    </div>
+
+<!-- script begin -->
+<script>
+
+    /**
+     * 文件大小转换为MB GB KB格式
+     * @param {string} size
+     * @param {number} fixedNum  小数点后面所带位数 默认0位
+     */
+    function countFileSize (size,fixedNum) {
+        fixedNum=fixedNum || 0;
+        var  fsize = parseFloat(size, fixedNum),
+             fileSizeString;
+
+        if (fsize < 1024) {
+            fileSizeString = fsize.toFixed(fixedNum) + "B";
+        } else if (fsize < 1024 * 1024) {
+            fileSizeString = (fsize / 1024).toFixed(fixedNum) + "KB";
+        } else if (fsize < 1024 * 1024 * 1024) {
+            fileSizeString = (fsize / 1024 / 1024).toFixed(fixedNum) + "MB";
+        } else if (fsize < 1024 * 1024 * 1024 *1024) {
+            fileSizeString = (fsize / 1024 / 1024 / 1024).toFixed(fixedNum) + "GB";
+        } else {
+            fileSizeString = "0B";
+        }
+        return fileSizeString;
+    }
+
+    /**
+     * 上传图片浏览图片  单选/多选
+     * @param {object} file - document对象
+     * @param {number} maxSize - 图片最大值 B单位
+     */
+    function previewFiles(fileDom,maxSize){
+        var maxFileSize,
+            files=fileDom.files,
+            fileContainer=fileDom.nextElementSibling,
+            maxSize=maxSize || 1024 * 1024 * 1024; //默认最大只能上传1M的图片
+
+        if (files) {
+            for(var i in files){
+                if(files[i].size > maxFileSize){
+                    alert('上传的文件不能超过'+countFileSize(maxFileSize));
+                    break;
+                }
+            }
+            fileContainer.innerHTML='';
+            var html='';
+            function readAndPreview(file,index,aa) {
+                // Make sure `file.name` matches our extensions criteria
+                if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+                    var reader = new FileReader();
+                    reader.addEventListener("load", function () {
+                        var image = new Image();
+                        image.title = file.name;
+                        image.src = this.result;
+                        fileContainer.appendChild(image);
+                    }, false);
+                    reader.readAsDataURL(file);
+                }
+            }
+            [].forEach.call(files, readAndPreview);
+        }
+    }
+</script>
+<!-- script end -->
+</body>
+</html>

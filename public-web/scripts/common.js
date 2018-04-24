@@ -18,7 +18,8 @@
 			* @param { string } str - 去空格的字符串
 			* @param { string } type - 类型 (1-所有空格  2-前后空格  3-前空格 4-后空格) 默认2
 		*/ 		   
-	    trim: function(str, type=2) {
+	    trim: function(str, type) {
+			type=type || 2;
 	        switch (type) {
 	            case 1:
 	                return str.replace(/\s+/g, "");
@@ -71,10 +72,35 @@
 			if(arr_url && arr_url[1]){
 				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
 				var r = arr_url[1].match(reg);
-				if (r != null) return unescape(r[2]);
+				if (r != null) return decodeURI(r[2]);
 			}
 			return null;
-		},  
+		},
+		/*
+		 * 增加或修改url中某个参数的值
+		 * @return {string} url 目标url
+		 * @return {string} paramName 需要替换的参数名称
+		 * @return {string} paramValue 替换后的参数的值
+		 * @return {string} url 替换后url值
+		 */
+		changeUrlParam:function(paramName,paramValue,url){
+			url=url || window.location.href;
+			var pattern=paramName+'=([^&]*)',
+				replaceText=paramName+'='+paramValue;
+
+			if(url.match(pattern)){
+				var tmp='/('+ paramName+'=)([^&]*)/gi';
+				tmp=url.replace(eval(tmp),replaceText);
+				return tmp;
+			}else{
+				if(url.match('[\?]')){
+					return url+'&'+replaceText;
+				}else{
+					return url+'?'+replaceText;
+				}
+			}
+			return url+'\n'+paramName+'\n'+paramValue;
+		},
 		/*
 			* 手机类型判断
 			* @param { string } type - 类型
@@ -140,7 +166,32 @@
 		    var head = document.getElementsByTagName('head')[0];
 		    head.appendChild(style);
 		    return  style;
-	    },         
+	    },
+		file: {
+			/**
+			 * 文件大小转换为MB GB KB格式
+			 * @param {string} size
+			 * @param {number} fixedNum  小数点后面所带位数
+			 */
+			countFileSize: function (size,fixedNum) {
+				fixedNum=fixedNum || 0;
+				var fsize = parseFloat(size, fixedNum),
+					fileSizeString;
+
+				if (fsize < 1024) {
+					fileSizeString = fsize.toFixed(fixedNum) + "B";
+				} else if (fsize < 1024 * 1024) {
+					fileSizeString = (fsize / 1024).toFixed(fixedNum) + "KB";
+				} else if (fsize < 1024 * 1024 * 1024) {
+					fileSizeString = (fsize / 1024 / 1024).toFixed(fixedNum) + "MB";
+				} else if (fsize < 1024 * 1024 * 1024 *1024) {
+					fileSizeString = (fsize / 1024 / 1024 / 1024).toFixed(fixedNum) + "GB";
+				} else {
+					fileSizeString = "0B";
+				}
+				return fileSizeString;
+			}
+		},
 	    //DOM元素方法
 		props:{	
 			/*
@@ -310,7 +361,6 @@
 				* @param { CSS } css - css样式 	[可选]	
 			*/	
 			prompt: function(tips,callback,className,css){
-				
 				var body = document.getElementsByTagName("BODY")[0],
 				    head = document.getElementsByTagName('head')[0],
 				    cssCode='.message-prompt{position:fixed;max-width:750px;margin:0 auto;left:0;right:0;top:30%;z-index:10;text-align:center}.message-prompt .message-prompt-content{display:inline-block;min-width:30%;max-width:70%;margin:0 auto;background-color:rgba(0,0,0,0.8);border-radius:5px;padding:.2rem;font-size:.3rem;text-align:center;color:#FFF;word-wrap:break-word}',						
@@ -497,6 +547,7 @@
     }
 
 })();
+
 
 
 
