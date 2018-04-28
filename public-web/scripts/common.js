@@ -357,8 +357,6 @@
 				* 信息提示弹窗，自动消失
 				* @param { string } tips - 提示的字符串
 				* @param { Function } callback - 回调函数 [可选]
-				* @param { string } className - //外层容器样式名 [可选]
-				* @param { CSS } css - css样式 	[可选]	
 			*/	
 			prompt: function(tips,callback){
 				var body = document.getElementsByTagName("BODY")[0],
@@ -395,7 +393,6 @@
 		            okStr:obj.okStr || '确定',     
 		            noStr:obj.noStr || '取消',
 					icon:obj.icon  || 'warn',
-					className:obj.className,    //外层容器样式名 
 					callbackOk:obj.callbackOk,  //确认回调
 					callbackNo:obj.callbackNo   //取消回调
 		        },	             
@@ -457,7 +454,6 @@
 		        var param = {
 		        	title:obj.title,           //弹窗标题
 		        	html:obj.html,             //弹窗内容html
-					className:obj.className,   //外层容器样式名
 		        },
 				body = document.getElementsByTagName("BODY")[0],
 				head = document.getElementsByTagName('head')[0],
