@@ -394,7 +394,7 @@
 		            tips:obj.tips || '没有任何提示信息！',
 		            okStr:obj.okStr || '确定',     
 		            noStr:obj.noStr || '取消',
-					icon:obj.cancelStr  || 'warn',  
+					icon:obj.icon  || 'warn',
 					className:obj.className,    //外层容器样式名 
 					callbackOk:obj.callbackOk,  //确认回调
 					callbackNo:obj.callbackNo   //取消回调
