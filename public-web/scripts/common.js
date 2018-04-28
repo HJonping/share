@@ -360,22 +360,13 @@
 				* @param { string } className - //外层容器样式名 [可选]
 				* @param { CSS } css - css样式 	[可选]	
 			*/	
-			prompt: function(tips,callback,className,css){
+			prompt: function(tips,callback){
 				var body = document.getElementsByTagName("BODY")[0],
 				    head = document.getElementsByTagName('head')[0],
-				    cssCode='.message-prompt{position:fixed;max-width:750px;margin:0 auto;left:0;right:0;top:30%;z-index:10;text-align:center}.message-prompt .message-prompt-content{display:inline-block;min-width:30%;max-width:70%;margin:0 auto;background-color:rgba(0,0,0,0.8);border-radius:5px;padding:.2rem;font-size:.3rem;text-align:center;color:#FFF;word-wrap:break-word}',						
-					styleDom=utils.addCssCode(cssCode),
 					promptDiv = document.createElement("DIV"),
 					promptContentDiv=document.createElement("DIV");
 
-				if(css){
-					cssCode+=css;
-				}				
 				promptDiv.className='message-prompt';
-				if(className){
-					utils.props.addClass(promptDiv,className);
-				}
-
 				promptDiv.style.webkitTransition = "0.5s ease -webkit-transform";
                 promptDiv.style.webkitTransform = "translate3d(0,150%,0)";
                 promptContentDiv.className='message-prompt-content';
@@ -389,7 +380,6 @@
 
 				setTimeout(function(){
 					body.removeChild(promptDiv);
-					head.removeChild(styleDom);
 					if(callback){
 						callback();
 					}
@@ -409,8 +399,6 @@
 					callbackOk:obj.callbackOk,  //确认回调
 					callbackNo:obj.callbackNo   //取消回调
 		        },	             
-				cssCode='.message-confirm{position:fixed;z-index:10;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width:4.8rem;background-color:#fff;border-radius:.05rem;margin:0 auto;left:0;right:0;top:30%}.message-confirm .message-confirm-txt{font-size:.26rem;color:#666;line-height:150%;padding:.4rem;text-align:center;min-height:1.4rem;display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-moz-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center}.message-confirm .message-confirm-btn{font-size:.24rem;color:#666;display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;border-top:1px solid #dddddd}.message-confirm .message-confirm-btn div{border-right:1px solid #dddddd;text-align:center;padding:.3rem 0;-webkit-box-flex:1;-webkit-flex:1;-moz-box-flex:1;-ms-flex:1;flex:1}.message-confirm .message-confirm-btn div:last-child{border-right:none}.message-confirm .message-confirm-btn div.okBtn{color:#da004c}',					
-				styleDom=utils.addCssCode(cssCode),
 				body = document.getElementsByTagName("BODY")[0],
 				head = document.getElementsByTagName('head')[0],
 				maskDiv = document.createElement("DIV"),
@@ -421,7 +409,6 @@
 				confirmBtnNoDiv = document.createElement("DIV");
 				
 				maskDiv.className='mask';
-				maskDiv.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;z-index:4;display:block;background:rgba(0,0,0,0.5);';
 				confirmDiv.className='message-confirm';
                 if(param.className){
                 	utils.props.addClass(confirmDiv,param.className);
@@ -443,15 +430,13 @@
 			    maskDiv.onclick = function () {
 			        body.removeChild(maskDiv);
 			        body.removeChild(confirmDiv);
-			        head.removeChild(styleDom);
 			    };
 			    confirmBtnOkDiv.onclick = function () {
 			    	if(param.callbackOk){
 			    		param.callbackOk();
 			    	}
 			    	body.removeChild(maskDiv);
-			        body.removeChild(confirmDiv);	
-			        head.removeChild(styleDom);	    	
+			        body.removeChild(confirmDiv);
 			    };
 			    confirmBtnNoDiv.onclick = function () {
 			    	if(param.callbackNo){
@@ -459,7 +444,6 @@
 			    	}
 			    	body.removeChild(maskDiv);
 			        body.removeChild(confirmDiv);
-			        head.removeChild(styleDom);
 			    };
 			}
 		},  
@@ -467,16 +451,14 @@
 		dialog:{
 			/*
 				* 规则弹窗
-				* @param { object } obj - obj参数		
-			*/				
+				* @param { object } obj - obj参数
+			*/
 			ruleDialog: function(obj) {
 		        var param = {
 		        	title:obj.title,           //弹窗标题
 		        	html:obj.html,             //弹窗内容html
-					className:obj.className,   //外层容器样式名 
+					className:obj.className,   //外层容器样式名
 		        },
-		        cssCode='.rule-dialog{position:fixed;top:50%;left:50%;z-index:5;padding:.25rem;width:6.2rem;background:#fff;border-radius:5px}.rule-dialog h2{font-size:.36rem;line-height:150%;color:#333;text-align:center;margin-bottom:.2rem}.rule-dialog .rule-dialog-content{padding:.3rem;background-color:#f5f5f5;border-radius:5px}.rule-dialog .rule-dialog-content p{font-size:.24rem;line-height:150%;color:#333}.rule-dialog .rule-dialog-close{position:absolute;bottom:-1.5rem;left:50%;width:.8rem;height:.8rem;border:1px solid #fff;border-radius:100%;background:rgba(0,0,0,0.2);-webkit-transform:translate(-50%, 0);-ms-transform:translate(-50%, 0);transform:translate(-50%, 0);display:-webkit-box;display:-webkit-flex;display:-moz-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;-moz-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-moz-box-align:center;-ms-flex-align:center;align-items:center}.rule-dialog .rule-dialog-close a{display:inline-block;width:.5rem;height:1px;background:#fff;line-height:0;font-size:0;vertical-align:middle;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.rule-dialog .rule-dialog-close a:after{content:"/";display:block;width:.5rem;height:1px;background:#fff;-webkit-transform:rotate(-90deg);-ms-transform:rotate(-90deg);transform:rotate(-90deg)}',
-				styleDom=utils.addCssCode(cssCode),
 				body = document.getElementsByTagName("BODY")[0],
 				head = document.getElementsByTagName('head')[0],
 				ruleDialogDiv = document.createElement("DIV"),
@@ -486,7 +468,6 @@
 				maskDiv = document.createElement("DIV");
 
 				maskDiv.className='mask';
-				maskDiv.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;z-index:4;display:block;background:rgba(0,0,0,0.5);';
 				ruleDialogDiv.className='rule-dialog';
 				if(param.className){
                 	utils.props.addClass(ruleDialogDiv,param.className);
@@ -497,8 +478,8 @@
                 titleH2.innerHTML=obj.title;
                 ruleDialogContentDiv.innerHTML=obj.html;
                 ruleDialogCloseDiv.className='rule-dialog-close';
-                ruleDialogCloseDiv.innerHTML='<a href="javascript:;"></a>';               
-     
+                ruleDialogCloseDiv.innerHTML='<a href="javascript:;"></a>';
+
                 ruleDialogDiv.appendChild(titleH2);
                 ruleDialogDiv.appendChild(ruleDialogContentDiv);
                 ruleDialogDiv.appendChild(ruleDialogCloseDiv);
@@ -507,23 +488,22 @@
 
 				setTimeout(function(){
 					ruleDialogDiv.style.webkitTransform = "translate3d(-50%,-50%,0)";
-				},30);				
+				},30);
 
 				function removeDialog(){
 					ruleDialogDiv.style.webkitTransform = "translate3d(-50%,-500%,0)";
 					body.removeChild(maskDiv);
-					setTimeout(function(){				    	
+					setTimeout(function(){
 				        body.removeChild(ruleDialogDiv);
-				        head.removeChild(styleDom);					
 					},500);
-				}				
+				}
 
 			    ruleDialogCloseDiv.onclick = function () {
 			    	removeDialog();
 			    };
 			    maskDiv.onclick = function () {
-			        removeDialog();		
-			    };					
+			        removeDialog();
+			    };
 			}
 
 		},	

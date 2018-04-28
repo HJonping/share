@@ -61,6 +61,7 @@
     border-top:1px solid #dddddd;
 
     div{
+      flex: 1;
       border-right:1px solid #dddddd;
       text-align:center;
       padding:.2rem 0;
@@ -80,65 +81,67 @@
 
 /*规则弹窗 start*/
 .rule-dialog{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 5;
-  padding: .25rem;
-  width: 6.2rem;
-  background: #fff;
-  border-radius: 5px;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   z-index: 10;
+   padding: .3rem;
+   width: 6.2rem;
+   background: #fff;
+   border-radius: 5px;
 
-  h2{
-    font-size:.36rem;
-    line-height: 150%;
-    color: #333;
-    text-align: center;
-    margin-bottom: .2rem;
-  }
-  .rule-dialog-content{
-    padding: .3rem;
-    background-color: #f5f5f5;
-    border-radius: 5px;
+   h2{
+     font-size:.36rem;
+     line-height: 150%;
+     color: #333;
+     text-align: center;
+     margin-bottom: .2rem;
+   }
+   .rule-dialog-content{
+     padding: .3rem;
+     background-color: #f5f5f5;
+     border-radius: 5px;
+     max-height: 6rem;
+     overflow: scroll;
 
-    p{
-      font-size: .24rem;
-      line-height: 150%;
-      color: #333;
-    }
-  }
-  .rule-dialog-close{
-    position: absolute;
-    bottom: -1.5rem;
-    left: 50%;
-    width: .8rem;
-    height: .8rem;
-    border: 1px solid #fff;
-    border-radius: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    transform: translate(-50%, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+     p{
+       font-size: .24rem;
+       line-height: 180%;
+       color: #333;
+     }
+   }
+   .rule-dialog-close{
+     position: absolute;
+     bottom: -1.5rem;
+     left: 50%;
+     width: .8rem;
+     height: .8rem;
+     border: 1px solid #fff;
+     border-radius: 100%;
+     background: rgba(0, 0, 0, 0.2);
+     transform: translate(-50%, 0);
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
-    a{
-      display: inline-block;
-      width: .5rem;
-      height: 1px;
-      background: #fff;
-      line-height: 0;
-      font-size: 0;
-      vertical-align: middle;
-      transform: rotate(45deg);
-      &:after{
-        content: "/";
-        display: block;
-        width: .5rem;
-        height: 1px;
-        background: #fff;
-        transform: rotate(-90deg);
-      }
-    }
-  }
-}
+     a{
+       display: inline-block;
+       width: .5rem;
+       height: 1px;
+       background: #fff;
+       line-height: 0;
+       font-size: 0;
+       vertical-align: middle;
+       transform: rotate(45deg);
+       &:after{
+         content: "/";
+         display: block;
+         width: .5rem;
+         height: 1px;
+         background: #fff;
+         transform: rotate(-90deg);
+       }
+     }
+   }
+ }
 /*规则弹窗 end*/
