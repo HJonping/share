@@ -128,8 +128,8 @@ input {
 
   .message-prompt-content{
     display: inline-block;
-    min-width:30%;
-    max-width:70%;
+    min-width:2.25rem;
+    max-width:5.25rem;
     margin:0 auto;
     background-color:rgba(0,0,0,0.8);
     border-radius:5px;
@@ -147,7 +147,7 @@ input {
   position:fixed;
   z-index:10;
   box-sizing:border-box;
-  width:64%;
+  width:4.8rem;
   background-color:#fff;
   border-radius:.05rem;
   margin:0 auto;

@@ -85,9 +85,9 @@ function messagePrompt(tips,callback){
     },1500);
 }
 /*
-	* 信息提示弹窗确认框
-	* @param { object } obj - obj参数		
-*/
+ * 信息提示弹窗确认框
+ * @param { object } obj - obj参数
+ */
 function messageConfirm(obj){
     var param = {
             tips:obj.tips || '没有任何提示信息！',
@@ -147,56 +147,56 @@ function messageConfirm(obj){
 }
 
 /*
-	* 规则弹窗
-	* @param { object } obj - obj参数		
-*/				
+ * 规则弹窗
+ * @param { object } obj - obj参数
+ */
 function ruleDialog(obj) {
     var param = {
-    	title:obj.title,           //弹窗标题
-    	html:obj.html,             //弹窗内容html
-    },
-	body = document.getElementsByTagName("BODY")[0],
-	head = document.getElementsByTagName('head')[0],
-	ruleDialogDiv = document.createElement("DIV"),
-	titleH2 = document.createElement("h2"),
-	ruleDialogContentDiv = document.createElement("DIV"),
-	ruleDialogCloseDiv = document.createElement("DIV"),
-	maskDiv = document.createElement("DIV");
+            title:obj.title,           //弹窗标题
+            html:obj.html,             //弹窗内容html
+        },
+        body = document.getElementsByTagName("BODY")[0],
+        head = document.getElementsByTagName('head')[0],
+        ruleDialogDiv = document.createElement("DIV"),
+        titleH2 = document.createElement("h2"),
+        ruleDialogContentDiv = document.createElement("DIV"),
+        ruleDialogCloseDiv = document.createElement("DIV"),
+        maskDiv = document.createElement("DIV");
 
-	maskDiv.className='mask';
-	ruleDialogDiv.className='rule-dialog';
+    maskDiv.className='mask';
+    ruleDialogDiv.className='rule-dialog';
     ruleDialogDiv.style.webkitTransition = "0.5s ease -webkit-transform";
     ruleDialogDiv.style.webkitTransform = "translate3d(-50%,-500%,0)";
     ruleDialogContentDiv.className='rule-dialog-content';
     titleH2.innerHTML=obj.title;
     ruleDialogContentDiv.innerHTML=obj.html;
     ruleDialogCloseDiv.className='rule-dialog-close';
-    ruleDialogCloseDiv.innerHTML='<a href="javascript:;"></a>';               
+    ruleDialogCloseDiv.innerHTML='<a href="javascript:;"></a>';
 
     ruleDialogDiv.appendChild(titleH2);
     ruleDialogDiv.appendChild(ruleDialogContentDiv);
     ruleDialogDiv.appendChild(ruleDialogCloseDiv);
-	body.appendChild(maskDiv);
-	body.appendChild(ruleDialogDiv);
+    body.appendChild(maskDiv);
+    body.appendChild(ruleDialogDiv);
 
-	setTimeout(function(){
-		ruleDialogDiv.style.webkitTransform = "translate3d(-50%,-50%,0)";
-	},30);				
+    setTimeout(function(){
+        ruleDialogDiv.style.webkitTransform = "translate3d(-50%,-50%,0)";
+    },30);
 
-	function removeDialog(){
-		ruleDialogDiv.style.webkitTransform = "translate3d(-50%,-500%,0)";
-		body.removeChild(maskDiv);
-		setTimeout(function(){				    	
-	        body.removeChild(ruleDialogDiv);					
-		},500);
-	}				
+    function removeDialog(){
+        ruleDialogDiv.style.webkitTransform = "translate3d(-50%,-500%,0)";
+        body.removeChild(maskDiv);
+        setTimeout(function(){
+            body.removeChild(ruleDialogDiv);
+        },500);
+    }
 
     ruleDialogCloseDiv.onclick = function () {
-    	removeDialog();
+        removeDialog();
     };
     maskDiv.onclick = function () {
-        removeDialog();		
-    };					
+        removeDialog();
+    };
 }
 
 /*
@@ -231,6 +231,44 @@ function preventDefault (e) {
 	e.preventDefault ? e.preventDefault() : e.returnValue = false;
 }
 
+/*
+ * 计算2个日期之间相差的 年份 或者月份或时间等
+ * @param { date/string } date1 - 开始时间
+ * @param { date/string } date2 - 结束时间时间
+ * @param { string } type - 返回的类型  根据 timeType键值传入
+ * @param { string } returnTYpe - 返回数据  round（四舍五入）,ceil（上舍入）,parseInt（取整）
+ */
+function dateDiffer(date1, date2,type,returnTYpe) {
+    date1 = date1 instanceof Date ? date1 : new Date(date1);
+    date1 = date1.getTime();
+    date2 = date2 instanceof Date ? date2 : new Date(date2);
+    date2 = date2.getTime();
+    type = type || 'year';
+    returnTYpe=returnTYpe || 'round'; //默认四舍五入
+
+    var diffValue = Math.abs(date2 - date1);
+    var second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24,
+        month = day * 30,
+        year = month * 12;
+    var timeType = {
+        second: second,
+        minute: minute,
+        hour: hour,
+        day: day,
+        month: month,
+        year: year
+    };
+    if(returnTYpe=="parseInt"){
+        return parseInt( diffValue / timeType[type]);
+    }else if(returnTYpe=="ceil"){
+        return Math.ceil( diffValue / timeType[type]);
+    }else{
+        return Math.round( diffValue / timeType[type]);
+    }
+}
 
 
 
