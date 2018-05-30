@@ -272,3 +272,26 @@ function dateDiffer(date1, date2,type,returnTYpe) {
 
 
 
+/**
+ * 页面到达底部，加载更多
+ *  * @param { function } callback - 回调函数
+ */
+function loadMoreHandle(callback){
+    window.addEventListener('scroll',function() {
+        if(isSlideToBottom()){
+            callback();
+        }
+    }, false);
+}
+
+//判断是否滑到离底部5像素的距离
+function isSlideToBottom(){
+    var scrollTop=document.documentElement.scrollTop || document.body.scrollTop || 0,             //获取滚动条当前的位置
+        clientHeight=document.documentElement.clientHeight || document.body.clientHeight || 0,    //获取网页可见区域高
+        scrollHeight=document.documentElement.scrollHeight || document.body.scrollHeight || 0;    //获取网页总高度
+
+    return scrollTop + clientHeight > scrollHeight-5;
+}
+
+
+
