@@ -32,6 +32,8 @@ function browserType(type) {
             return navigator.userAgent.toLowerCase().indexOf('ipad') !== -1;
         case 'weixin':
             return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+        case 'alipay':
+            return navigator.userAgent.toLowerCase().indexOf('alipayclient') !== -1;
         default:
             return navigator.userAgent.toLowerCase();
     }
@@ -90,6 +92,7 @@ function messagePrompt(tips,callback){
  */
 function messageConfirm(obj){
     var param = {
+            title:obj.title || "温馨提示",
             tips:obj.tips || '没有任何提示信息！',
             okStr:obj.okStr || '确定',
             noStr:obj.noStr || '取消',
@@ -101,6 +104,7 @@ function messageConfirm(obj){
         head = document.getElementsByTagName('head')[0],
         maskDiv = document.createElement("DIV"),
         confirmDiv = document.createElement("DIV"),
+        confirmTitleDiv = document.createElement("DIV"),
         confirmTxtDiv = document.createElement("DIV"),
         confirmBtnDiv = document.createElement("DIV"),
         confirmBtnOkDiv = document.createElement("DIV"),
@@ -108,10 +112,12 @@ function messageConfirm(obj){
 
     maskDiv.className='mask';
     confirmDiv.className='message-confirm';
+    confirmTitleDiv.className='message-confirm-title';
     confirmTxtDiv.className='message-confirm-txt';
     confirmBtnDiv.className='message-confirm-btn';
     confirmBtnOkDiv.className='okBtn';
     confirmBtnNoDiv.className='noBtn';
+    confirmTitleDiv.innerHTML=param.title;
     confirmTxtDiv.innerHTML=param.tips;
     confirmBtnOkDiv.innerHTML=param.okStr;
 
@@ -121,6 +127,7 @@ function messageConfirm(obj){
         confirmBtnDiv.appendChild(confirmBtnNoDiv);
     }
     confirmBtnDiv.appendChild(confirmBtnOkDiv);
+    confirmDiv.appendChild(confirmTitleDiv);
     confirmDiv.appendChild(confirmTxtDiv);
     confirmDiv.appendChild(confirmBtnDiv);
     body.appendChild(maskDiv);

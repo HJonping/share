@@ -117,6 +117,8 @@
 	                return navigator.userAgent.toLowerCase().indexOf('ipad') !== -1;
 	            case 'weixin':
 	                return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
+				case 'alipay':
+					return navigator.userAgent.toLowerCase().indexOf('alipayclient') !== -1;
 	            default:
 	                return navigator.userAgent.toLowerCase();
 	        }
