@@ -388,63 +388,69 @@
 			/*
 				* 信息提示弹窗确认框
 				* @param { object } obj - obj参数		
-			*/			
+			*/
 			confirm: function(obj){
-		        var param = {
-		            tips:obj.tips || '没有任何提示信息！',
-		            okStr:obj.okStr || '确定',     
-		            noStr:obj.noStr || '取消',
-					icon:obj.icon  || 'warn',
-					callbackOk:obj.callbackOk,  //确认回调
-					callbackNo:obj.callbackNo   //取消回调
-		        },	             
-				body = document.getElementsByTagName("BODY")[0],
-				head = document.getElementsByTagName('head')[0],
-				maskDiv = document.createElement("DIV"),
-				confirmDiv = document.createElement("DIV"),
-				confirmTxtDiv = document.createElement("DIV"),
-				confirmBtnDiv = document.createElement("DIV"),
-				confirmBtnOkDiv = document.createElement("DIV"),
-				confirmBtnNoDiv = document.createElement("DIV");
-				
+				var param = {
+						title:obj.title || "温馨提示",
+						tips:obj.tips || '没有任何提示信息！',
+						okStr:obj.okStr || '确定',
+						noStr:obj.noStr || '取消',
+						icon:obj.icon  || 'warn',
+						callbackOk:obj.callbackOk,  //确认回调
+						callbackNo:obj.callbackNo   //取消回调
+					},
+					body = document.getElementsByTagName("BODY")[0],
+					head = document.getElementsByTagName('head')[0],
+					maskDiv = document.createElement("DIV"),
+					confirmDiv = document.createElement("DIV"),
+					confirmTitleDiv = document.createElement("DIV"),
+					confirmTxtDiv = document.createElement("DIV"),
+					confirmBtnDiv = document.createElement("DIV"),
+					confirmBtnOkDiv = document.createElement("DIV"),
+					confirmBtnNoDiv = document.createElement("DIV");
+
 				maskDiv.className='mask';
 				confirmDiv.className='message-confirm';
-                if(param.className){
-                	utils.props.addClass(confirmDiv,param.className);
-                }				
+				confirmTitleDiv.className='message-confirm-title';
 				confirmTxtDiv.className='message-confirm-txt';
 				confirmBtnDiv.className='message-confirm-btn';
 				confirmBtnOkDiv.className='okBtn';
 				confirmBtnNoDiv.className='noBtn';
+				confirmTitleDiv.innerHTML=param.title;
 				confirmTxtDiv.innerHTML=param.tips;
 				confirmBtnOkDiv.innerHTML=param.okStr;
-				confirmBtnNoDiv.innerHTML=param.noStr;
-				confirmBtnDiv.appendChild(confirmBtnNoDiv);
-				confirmBtnDiv.appendChild(confirmBtnOkDiv);		
+
+				if(obj.noStr!=null){
+					//不为null才添加取消按钮
+					confirmBtnNoDiv.innerHTML=param.noStr;
+					confirmBtnDiv.appendChild(confirmBtnNoDiv);
+				}
+				confirmBtnDiv.appendChild(confirmBtnOkDiv);
+				confirmDiv.appendChild(confirmTitleDiv);
 				confirmDiv.appendChild(confirmTxtDiv);
 				confirmDiv.appendChild(confirmBtnDiv);
 				body.appendChild(maskDiv);
-				body.appendChild(confirmDiv);						
-	            
-			    maskDiv.onclick = function () {
-			        body.removeChild(maskDiv);
-			        body.removeChild(confirmDiv);
-			    };
-			    confirmBtnOkDiv.onclick = function () {
-			    	if(param.callbackOk){
-			    		param.callbackOk();
-			    	}
-			    	body.removeChild(maskDiv);
-			        body.removeChild(confirmDiv);
-			    };
-			    confirmBtnNoDiv.onclick = function () {
-			    	if(param.callbackNo){
-			    		param.callbackNo();
-			    	}
-			    	body.removeChild(maskDiv);
-			        body.removeChild(confirmDiv);
-			    };
-			}
+				body.appendChild(confirmDiv);
+
+				maskDiv.onclick = function () {
+					body.removeChild(maskDiv);
+					body.removeChild(confirmDiv);
+				};
+				confirmBtnOkDiv.onclick = function () {
+					if(param.callbackOk){
+						param.callbackOk();
+					}
+					body.removeChild(maskDiv);
+					body.removeChild(confirmDiv);
+				};
+				confirmBtnNoDiv.onclick = function () {
+					if(param.callbackNo){
+						param.callbackNo();
+					}
+					body.removeChild(maskDiv);
+					body.removeChild(confirmDiv);
+				};
+			},
 		},  
 		//弹窗
 		dialog:{
