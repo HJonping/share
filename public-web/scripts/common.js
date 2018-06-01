@@ -248,7 +248,7 @@
 			*/
 			isChinese: function(strs){
 				if(strs && typeof(strs) == 'string'){
-					reg=/^[\u4E00-\u9FA5]+$/; 
+					var reg=/^[\u4E00-\u9FA5]+$/;
 					return reg.test(strs);
 				}
 				return false;
