@@ -1,0 +1,235 @@
+@import 'variable';
+@import 'mixins';
+
+html, body {
+    font-family: $font-style-base;
+    font-size: $font-size-center;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, div, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-style: normal;
+    vertical-align: baseline;  /*把所有元素的内边距和边框不再会增加它的宽度*/
+    -moz-box-sizing: border-box;  /* Firefox */
+    -webkit-box-sizing: border-box;  /* Safari */
+    box-sizing: border-box;
+}
+
+ol, ul {
+
+    /*去掉列表点*/
+    list-style: none;
+}
+
+table {
+
+    /*去掉表格的双行线*/
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: $color-text-primary;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clearfix {
+    @include clearfix();
+}
+
+.wrapper {
+    width: 100%;
+    height: auto;
+    min-width: 1200px;
+    margin: 0 auto;
+}
+
+.w1200 {
+    width: 1200px;
+    margin: 0 auto;
+}
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/*加载中 动画 loading star*/
+.loading-in {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 11;
+    margin-left: -80px;
+    text-align: center;
+
+    .spinner {
+        float: left;
+        width: 80px;
+        text-align: center;
+
+        > div {
+            width: 20px;
+            height: 20px;
+            background-color: #c62153;
+            border-radius: 100%;
+            display: inline-block;
+            animation: bouncedelay 1.4s infinite ease-in-out;
+            animation-fill-mode: both;
+        }
+
+        .bounce1 {
+            animation-delay: -0.32s;
+        }
+
+        .bounce2 {
+            animation-delay: -0.16s;
+        }
+
+    }
+
+    p {
+        margin-left: 80px;
+        font-size: 16px;
+        color: #444;
+    }
+
+}
+
+@keyframes bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0);
+        -webkit-transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+
+}
+
+/*加载中 动画 loading end*/
+
+/*PC端确认框 start*/
+.message-confirm{
+    position:fixed;
+    z-index:10;
+    box-sizing:border-box;
+    width:440px;
+    background-color:#fff;
+    border-radius:3px;
+    margin:0 auto;
+    left:0;
+    right:0;
+    top:30%;
+    padding: 20px 40px;
+    transition: all 0.5s;
+
+    .message-confirm-close{
+        position: absolute;
+        top: 0;
+        right: 5px;
+        width: 36px;
+        height: 50px;
+        background-color: #eaeaea;
+        border-radius: 0 0 30px 30px;
+        cursor: pointer;
+
+        .close-inner{
+            padding: 3px 5px 0;
+            margin: 17px 3px 3px 3px;
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 100%;
+
+            &:hover{
+                a{
+                    transform: rotate(225deg);
+                }
+            }
+
+            a{
+                display: inline-block;
+                width: 20px;
+                height: 1px;
+                background: #c62153;
+                line-height: 0;
+                font-size: 0;
+                vertical-align: middle;
+                transform: rotate(45deg);
+                transition: all 0.5s;
+
+                &:after{
+                    content: '/';
+                    display: block;
+                    width: 20px;
+                    height: 1px;
+                    background: #c62153;
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+    }
+    .message-confirm-title{
+        font-size:16px;
+        color: #333;
+        text-align:center;
+        padding:20px 40px;
+        font-weight: bold;
+    }
+    .message-confirm-txt{
+        font-size:14px;
+        color:#666;
+        line-height:150%;
+        text-align:center;
+    }
+    .message-confirm-btn{
+        font-size:16px;
+        color: #fff;
+        margin: 0 auto;
+        text-align: center;
+        margin-top:40px;
+
+        div{
+            display: inline-block;
+            text-align:center;
+            width: 130px;
+            border-radius: 5px;
+            padding: 10px 5px;
+            cursor: pointer;
+
+            &.noBtn{
+                background-color: #999;
+            }
+            &.okBtn{
+                background-color: #da004c;
+            }
+            & + div{
+                margin-left: 30px;
+            }
+        }
+    }
+}
+/*PC端确认框 end*/

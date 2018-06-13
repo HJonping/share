@@ -95,7 +95,7 @@ function messageConfirm(obj){
             title:obj.title || "温馨提示",
             tips:obj.tips || '没有任何提示信息！',
             okStr:obj.okStr || '确定',
-            noStr:obj.noStr || '取消',
+            noStr:obj.noStr || '取消',  //默认没有取消按钮 需要加的话值为true或者对应的文案
             icon:obj.icon  || 'warn',
             callbackOk:obj.callbackOk,  //确认回调
             callbackNo:obj.callbackNo   //取消回调
@@ -123,7 +123,11 @@ function messageConfirm(obj){
 
     if(obj.noStr!=null){
         //不为null才添加取消按钮
-        confirmBtnNoDiv.innerHTML=param.noStr;
+        if(typeof obj.noStr == 'boolean' && obj.noStr){
+            confirmBtnNoDiv.innerHTML='取消';
+        }else{
+            confirmBtnNoDiv.innerHTML=param.noStr;
+        }
         confirmBtnDiv.appendChild(confirmBtnNoDiv);
     }
     confirmBtnDiv.appendChild(confirmBtnOkDiv);
