@@ -73,6 +73,12 @@
                 transform: rotate(360deg);
             }
         }
+        .loading-end{
+            text-align: center;
+            padding:.1rem;
+            color: #999;
+            font-size:.24rem;
+        }
     </style>
     <title>拍卖记录</title>
 </head>
@@ -114,92 +120,162 @@
             </li>
         </ul>
         <div class="dropload-load items-loading"><span class="loading"></span>加载中...</div>
+        <div class="loading-end" style="display: none;">数据已经加载完</div>
     </div>
 </div>
 <!-- script begin -->
 <script src="../scripts/flexible.js"></script>
 <script src="../plugins/jquery/jquery-3.1.1.min.js"></script>
 <script>
-    /*****************上拉加载更多 start**************/
-    var page=0,
-        flag=true,
-        $container=$("#container"),
-        $droploadLoad=$(".dropload-load");
 
-    //判断是否滑到离底部10像素的距离
+    /**
+     * 页面到达底部，加载更多
+     *  * @param { function } callback - 回调函数
+     */
+    function loadMoreHandle(callback){
+        window.addEventListener('scroll',function() {
+            if(isSlideToBottom()){
+                callback();
+            }
+        }, false);
+    }
+
+    //判断是否滑到离底部5像素的距离
     function isSlideToBottom(){
         var scrollTop=document.documentElement.scrollTop || document.body.scrollTop || 0,             //获取滚动条当前的位置
-            clientHeight=document.documentElement.clientHeight || document.body.clientHeight || 0,    //获取网页可见区域高
-            scrollHeight=document.documentElement.scrollHeight || document.body.scrollHeight || 0;    //获取网页总高度
+                clientHeight=document.documentElement.clientHeight || document.body.clientHeight || 0,    //获取网页可见区域高
+                scrollHeight=document.documentElement.scrollHeight || document.body.scrollHeight || 0;    //获取网页总高度
 
-        return scrollTop + clientHeight > scrollHeight-10;
-    }
-    //添加分页数据
-    function appendPageData(obj){
-        var html='';
-        obj.map(function(item,index){
-            html+='<li>'+
-                     '<div class="img"></div>'+
-                     '<p><span>'+item.name+index+'</span></p>'+
-                   '</li>';
-        });
-        $container.append(html);
+        return scrollTop + clientHeight > scrollHeight-5;
     }
 
-    //滚动事件触发
-    window.onscroll = function() {
-        if(isSlideToBottom()) {
-            if(flag==true){
-                flag=false;
-                page++;
-                /********此处代码只是为了看效果 要删除 start*******/
-                $droploadLoad.show();
-                setTimeout(function(){
-                    $droploadLoad.hide();
-                    flag=true;
-                    var obj=[
-                        { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                        { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                        { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                        { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                        { name:'标题标题标题标题标题标题标题标题标题标题标题标题'}
-                    ];
-                    appendPageData(obj);
-                },2000);
-                /********此处代码只是为了看效果 要删除 end*******/
 
-                $.ajax({
-                    type:'GET',
-                    url:'/',
-                    data:{},
-                    dataType:'json',
-                    beforeSend:function(){
-                        $droploadLoad.show();
-                    },
-                    success:function(result){
-                        if(!result){
-                            flag=false;
+    $(function () {
+        var pageNum=10,                    //每页显示数
+            currentPageIndex=0,            //当前页数
+            loadedEndFlag=false,          //数据是否已经加载完
+            preventRepeatRequest=false,   //到达底部加载数据，防止重复加载
+            $container=$('#container'),
+            $droploadLoad=$('.dropload-load'),
+            $loadingEnd=$('.loading-end');
+
+
+        //提示数据加载中
+        function showLoading() {
+            $droploadLoad.show();
+            $loadingEnd.hide();
+        }
+        //移除数据加载中
+        function hideLoading() {
+            $droploadLoad.hide();
+        }
+        //提示数据加载完
+        function showLoadingEnd() {
+            $droploadLoad.hide();
+            $loadingEnd.show();
+        }
+        //添加分页数据
+        function appendPageData(obj){
+            var html='';
+            obj.map(function(item,index){
+                html+='<li>'+
+                        '<div class="img"></div>'+
+                        '<p><span>'+item.name+index+'</span></p>'+
+                        '</li>';
+            });
+            $container.append(html);
+        }
+
+        loadMoreData(); //加载第一页数据
+
+        function loadMoreData() {
+            if (loadedEndFlag) {
+                return;
+            }
+            //防止重复请求
+            if (preventRepeatRequest) {
+                return;
+            }
+            preventRepeatRequest = true;
+            currentPageIndex++;
+            requestProductData();
+        }
+        //请求数据
+        function requestProductData() {
+
+            /*只是为了看效果 */
+            showLoading();
+            var obj=[
+                { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
+                { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
+                { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
+                { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
+                { name:'标题标题标题标题标题标题标题标题标题标题标题标题'}
+            ];
+            appendPageData(obj);
+            hideLoading();
+            if(currentPageIndex==2){
+                //看效果
+                loadedEndFlag=true;
+                showLoadingEnd();
+            }
+            preventRepeatRequest=false;
+            /*只是为了看效果  end*/
+            return;
+
+            //实际需要删掉前面代码 修改请求数据
+            var params={
+                rows:pageNum,
+                page:currentPageIndex,
+            };
+
+            $.ajax({
+                url: '/',
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(params),
+                beforeSend: function() {
+                    showLoading();
+                },
+                success: function(result) {
+                    var data=result.item.news;
+                    if(result.code==0){
+                        var dataLength=result.item.news.length;
+                        if(dataLength==0){
+                            //无数据
+                            preventRepeatRequest=true;
+                            $droploadLoad.hide();
+                            loadedEndFlag = true;
+                            showLoadingEnd();
                             return;
                         }
-                        $droploadLoad.hide();
-                        flag=true;
-                        var obj=[
-                            { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                            { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                            { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                            { name:'标题标题标题标题标题标题标题标题标题标题标题标题'},
-                            { name:'标题标题标题标题标题标题标题标题标题标题标题标题'}
-                        ];
-                        appendPageData(obj);
-                    },
-                    error:function(XMLHttpRequest, textStatus, errorThrown){
-                        messagePrompt(XMLHttpRequest.responseText);
+                        if (dataLength < pageNum) {
+                            //返回的数据小于每页的数据
+                            loadedEndFlag = true;
+                            showLoadingEnd();
+                        }
+                        appendPageData(data);
+
+                    }else{
+                        messageConfirm({
+                            tips:result.message
+                        })
                     }
-                });
-            }
+                    preventRepeatRequest=false;
+                    hideLoading();
+                },
+                error: function(xhr) {
+                    hideLoading();
+                    var errCode = JSON.parse(xhr.responseText).requestId.substr(0, 8);
+                    messageConfirm({
+                        tips:errCode
+                    })
+                }
+            });
         }
-    }
-    /*****************上拉加载更多 end**************/
+        loadMoreHandle(loadMoreData);  //监听滑动事件 传入回调函数
+    })
+
 </script>
 <!-- script end -->
 </body>
