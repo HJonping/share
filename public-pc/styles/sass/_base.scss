@@ -130,6 +130,100 @@ a {
 
 /*加载中 动画 loading end*/
 
+/*消息提示 start*/
+.message-prompt{
+    position:fixed;
+    @extend .max-width;
+    margin:0 auto;
+    left:0;
+    right:0;
+    top:30%;
+    z-index:10;
+    text-align:center;
+
+    .message-prompt-content{
+        display: inline-block;
+        min-width:2.25rem;
+        max-width:5.25rem;
+        margin:0 auto;
+        background-color:rgba(0,0,0,0.8);
+        border-radius:5px;
+        padding:.2rem;
+        font-size:.3rem;
+        text-align:center;
+        color:#FFF;
+        word-wrap:break-word;
+    }
+}
+/*消息提示 start*/
+
+/*规则弹窗 start*/
+.rule-dialog{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    padding: .3rem;
+    width: 6.2rem;
+    background: #fff;
+    border-radius: 5px;
+
+    h2{
+        font-size:.36rem;
+        line-height: 150%;
+        color: #333;
+        text-align: center;
+        margin-bottom: .2rem;
+    }
+    .rule-dialog-content{
+        padding: .3rem;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        max-height: 6rem;
+        overflow: scroll;
+
+        p{
+            font-size: .24rem;
+            line-height: 180%;
+            color: #333;
+        }
+    }
+    .rule-dialog-close{
+        position: absolute;
+        bottom: -1.5rem;
+        left: 50%;
+        width: .8rem;
+        height: .8rem;
+        border: 1px solid #fff;
+        border-radius: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        transform: translate(-50%, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a{
+            display: inline-block;
+            width: .5rem;
+            height: 1px;
+            background: #fff;
+            line-height: 0;
+            font-size: 0;
+            vertical-align: middle;
+            transform: rotate(45deg);
+            &:after{
+                content: "/";
+                display: block;
+                width: .5rem;
+                height: 1px;
+                background: #fff;
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}
+/*规则弹窗 end*/
+
 /*PC端确认框 start*/
 .message-confirm{
     position:fixed;
@@ -233,3 +327,4 @@ a {
     }
 }
 /*PC端确认框 end*/
+
