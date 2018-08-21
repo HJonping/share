@@ -2,3 +2,124 @@
 @import 'mixins';
 @import 'base';
 
+
+
+.bac-gray{
+    background-color: #f7f7f7;
+}
+.g-header{
+    @include center-horizontal(fixed);
+    background-color: $fill-base;
+    top:0;
+    left:50%;
+    width: 100%;
+    @extend .max-width;
+    height: 2.3rem;
+    font-size: .85rem;
+    line-height: 2.3rem;
+    z-index:1;
+    @include flex-center();
+    &.static{
+        position: static;
+        justify-content: flex-start;
+        transform: none;
+        background-image: none;
+    }
+    .g-header-left{
+        position: relative;
+        width: 2.1rem;
+        height: 100%;
+        @include flex-center();
+        a{
+            width: 100%;
+            height: 100%;
+            @include flex-center();
+            i{
+                @include arrow(left,.6rem,#707070);
+            }
+        }
+    }
+    .g-header-middle{
+        flex:1;
+        .g-header-title{
+            text-align: center;
+        }
+    }
+    .g-header-right{
+        width: 2.1rem;
+        a{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        i{
+            width: 1rem;
+            display: block;
+            height: .8rem;
+            font-size: 0;
+            img{
+                width: 100%;
+            }
+        }
+    }
+}
+.g-content{
+    &.paddingT{
+        padding-top:2.3rem;
+    }
+}
+
+.card-success{
+    background-color: #fff;
+    padding: .8rem.6rem;
+    .img{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+            width: 1.4rem;
+        }
+    }
+    .text{
+        font-size: .8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .7rem 0 1.2rem;
+    }
+    .book-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        a{
+            min-width: 4.4rem;
+            display: inline-block;
+            padding: .5rem .75rem;
+            border-radius:.9rem;
+            text-align: center;
+            font-size: .8rem;
+            color: #fff;
+            @include gradient-horizontal(#f20054, #fe2d2d, $from: 0, $to: 100%);
+        }
+
+    }
+
+}
+
+.banner {
+    @include clearfix();
+    margin-top: .4rem;
+    a {
+        display: block;
+        font-size: 0;
+        width: 100%;
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}

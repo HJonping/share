@@ -19,6 +19,7 @@ function getRemRatio(){
 /*
  * 手机类型判断
  * @param { string } type - 类型
+ * @param { string } data - 传入的数据 例：判断是否是APP的数据
  * return true 是此类型
  * return false 不是此类型
  */
@@ -34,6 +35,8 @@ function browserType(type) {
             return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1;
         case 'alipay':
             return navigator.userAgent.toLowerCase().indexOf('alipayclient') !== -1;
+        case 'app':
+            return navigator.userAgent.toLowerCase().indexOf('dossen(android') !== -1 || navigator.userAgent.toLowerCase().indexOf('dossen(ios') !== -1;
         default:
             return navigator.userAgent.toLowerCase();
     }
@@ -223,7 +226,7 @@ function getUrlParam(name, url) {
     if (arr_url && arr_url[1]) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = arr_url[1].match(reg);
-        if (r != null) return unescape(r[2]);
+        if (r != null) return decodeURIComponent(r[2]);
     }
     return null;
 }

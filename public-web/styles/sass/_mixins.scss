@@ -67,44 +67,95 @@
     overflow: hidden;
 }
 
-// triangle 三角形函数
-@mixin triangle($dir, $size: 10px 10px, $color: currentColor) {
-  content:"";
-  display: inline-block;
-  border-width: 0;
-  border-color: transparent;
-  border-style: solid;
+// triangle 三角形函数  实心带背景
+@mixin triangle($dir:top, $size: .18rm .18rem, $color: #666) {
+    content:"";
+    display: inline-block;
+    border-width: 0;
+    border-color: transparent;
+    border-style: solid;
 
-  @if $dir == top {
-    border-bottom-color: $color;
-    border-bottom-width: nth($size, 2);
-    border-left-width: nth($size, 1) / 2;
-    border-right-width: nth($size, 1) / 2;
-  }
-  @else if $dir == bottom {
-    border-top-color: $color;
-    border-top-width: nth($size, 2);
-    border-left-width: nth($size, 1) / 2;
-    border-right-width: nth($size, 1) / 2;
-  }
-  @else if $dir == left {
-    border-right-color: $color;
-    border-right-width: nth($size, 1);
-    border-top-width: nth($size, 2) / 2;
-    border-bottom-width: nth($size, 2) / 2;
-  }
-  @else if $dir == right {
-    border-left-color: $color;
-    border-left-width: nth($size, 1);
-    border-top-width: nth($size, 2) / 2;
-    border-bottom-width: nth($size, 2) / 2;
-  }
+    @if $dir == top {
+        border-bottom-color: $color;
+        border-bottom-width: nth($size, 2);
+        border-left-width: nth($size, 1) / 2;
+        border-right-width: nth($size, 1) / 2;
+    }
+    @else if $dir == bottom {
+        border-top-color: $color;
+        border-top-width: nth($size, 2);
+        border-left-width: nth($size, 1) / 2;
+        border-right-width: nth($size, 1) / 2;
+    }
+    @else if $dir == left {
+        border-right-color: $color;
+        border-right-width: nth($size, 1);
+        border-top-width: nth($size, 2) / 2;
+        border-bottom-width: nth($size, 2) / 2;
+    }
+    @else if $dir == right {
+        border-left-color: $color;
+        border-left-width: nth($size, 1);
+        border-top-width: nth($size, 2) / 2;
+        border-bottom-width: nth($size, 2) / 2;
+    }
+}
+
+//空心三角箭头
+@mixin arrow($direction:right,$width:.25rem,$color:$border-color-base,$border-with:2px){
+    content: '';
+    display:inline-block;
+    width:$width;
+    height:$width;
+    transform: rotate(45deg);
+
+    @if $direction == top{
+        border-top: $border-with solid $color;
+        border-left: $border-with solid $color;
+    }
+    @else if $direction == bottom{
+        border-bottom: $border-with solid $color;
+        border-right: $border-with solid $color;
+    }
+    @else if $direction == left{
+        border-bottom: $border-with solid $color;
+        border-left: $border-with solid $color;
+    }
+    @else if $direction == right{
+        border-top:$border-with solid $color;
+        border-right: $border-with solid $color;
+    }
+}
+
+//带背景实心三角箭头
+@mixin solid-arrow($direction:right, $width:.15rem, $color:$border-color-base) {
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    content: '';
+    border-width: $width;
+    border-style: solid;
+    @if $direction==top {
+        border-color: transparent transparent $color transparent;
+    }
+    @else if $direction==bottom {
+        border-color: $color transparent transparent transparent;
+    }
+    @else if $direction==left {
+        border-color: transparent $color transparent transparent;
+    }
+    @else if $direction==right {
+        border-color: transparent transparent transparent $color;
+    }
 }
 
 //盒模型上下左右居中对齐
 @mixin flex-center(){
-  display: flex;
-  -justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+
 

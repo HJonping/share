@@ -2,33 +2,35 @@
    公用变量
 */
 
+//设计宽度
+$design-width:750px;
+
 /* color
 -------------------------- */
-$max-width:750px;
-
+$max-width:7.5rem;
 //主色调
-$color-primary: #da004b !default;
+$color-primary: #e70041 !default;
 //文本主颜色
 $color-text-primary: #333333 !default;
 //文本第二使用颜色
-$color-text-secondary: #666 !default;
-//placeholder颜色
+$color-text-second: #999 !default;
+//文本第三使用颜色
+$color-text-third: #666 !default;
 $color-text-placeholder:#ccc !default;
-
 
 /* Border
 -------------------------- */
 //主边框色
-$border-color-base: #ddd !default;
+$border-color-base: #e0e0e0 !default;
 //浅边框色
-$border-color-light: #ccc !default;
+$border-color-light: #eee !default;
 
 //主圆角
-$border-radius-base: 5px !default;
+$border-radius-base: .05rem !default;
+$border-radius-second: .1rem !default;
 //小圆角
-$border-radius-small: 3px !default;
-//圆
-$border-radius-circle: 100% !default;
+$border-radius-small: .03rem !default;
+
 
 /* Box-shadow
 -------------------------- */
@@ -37,17 +39,19 @@ $box-shadow-base: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04) !defa
 //深阴影
 $box-shadow-dark: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .12) !default;
 //浅阴影
-$box-shadow-light:0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+$box-shadow-light:0 2px 12px 0 #e8e8e8 !default;
 
 /* Fill
 -------------------------- */
 //填充主颜色
-$--fill-base: #fff;
+$fill-base: #fff;
+$fill-second:#f7f7f7;
 
 /* Font
 -------------------------- */
 //默认字体
 $font-style-base:-apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue","Microsoft Yahei",STHeiti,Tahoma,Simsun,sans-serif;
+$font-size-min-small: 0.22rem !default;
 $font-size-small: 0.24rem !default;
 $font-size-center: 0.28rem !default;
 $font-size-large: 0.32rem !default;
@@ -55,6 +59,8 @@ $font-size-large: 0.32rem !default;
 $font-color-disabled-base: #bbb !default;
 //默认行高
 $font-line-height-primary: 150% !default;
+$font-line-height-second: 180% !default;
+$font-line-height-third: 200% !default;
 
 /* Disable base
 -------------------------- */
@@ -70,10 +76,18 @@ $disabled-border-base: $border-color-light !default;
 -------------------------- */
 //动画默认设置
 $time-base:0.5s;
-$all-transition: all $time-base cubic-bezier(.645,.045,.355,1) !default;
+$cubic-bezier-base:cubic-bezier(.55,0,.1,1) !default;
+$all-transition: all $time-base $cubic-bezier-base;
 $fade-transition: opacity $time-base cubic-bezier(0.23, 1, 0.32, 1) !default;
 $fade-linear-transition: opacity $time-base linear !default;
 $md-fade-transition: transform $time-base cubic-bezier(0.23, 1, 0.32, 1), opacity $time-base cubic-bezier(0.23, 1, 0.32, 1) !default;
+
+//左右主边距  内边距  外边距
+$margin-lr-primary:.3rem;
+//上下主边距  内边距  外边距
+$margin-tb-primary:.15rem;
+$margin-tb-second:.1rem;
+
 
 
 
